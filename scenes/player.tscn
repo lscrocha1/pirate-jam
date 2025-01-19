@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://blqt3vbmisn4t"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_7qfaf"]
+[ext_resource type="Texture2D" uid="uid://d0aanxkw5hcpd" path="res://assets/sword sprite sheet.png" id="2_6nnie"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_skmb1"]
+radius = 8.0
+height = 82.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_7qfaf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(4.1875, 4.1875)
+texture = ExtResource("2_6nnie")
+region_enabled = true
+region_rect = Rect2(0, 0, 16.7653, 31.1815)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(19, 1)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_skmb1")
