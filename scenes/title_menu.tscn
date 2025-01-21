@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvpi6tgef522m"]
+[gd_scene load_steps=9 format=3 uid="uid://cvpi6tgef522m"]
 
 [ext_resource type="Texture2D" uid="uid://c56w1t5whtw01" path="res://assets/title_menu_sword.png" id="1_3uty4"]
+[ext_resource type="Script" path="res://scripts/title_menu.gd" id="1_xjf3c"]
 [ext_resource type="Texture2D" uid="uid://daovtb8gvohb6" path="res://assets/title_menu_bg.png" id="2_0eoiq"]
 [ext_resource type="AudioStream" uid="uid://bpkeprk4gxhd7" path="res://assets/Title-Menu_Theme.mp3" id="3_op6kl"]
 [ext_resource type="FontFile" uid="uid://dce4hcwfi38ex" path="res://assets/yoster-island.regular.ttf" id="4_u6ekn"]
@@ -43,7 +44,8 @@ _data = {
 "blinking_text": SubResource("Animation_yubfh")
 }
 
-[node name="Title Menu" type="Node2D"]
+[node name="TitleMenu" type="Node2D"]
+script = ExtResource("1_xjf3c")
 
 [node name="Sword" type="Sprite2D" parent="."]
 z_index = 1
