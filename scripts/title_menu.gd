@@ -9,6 +9,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_anything_pressed():
-		change_scene.emit()
+	if Input.is_action_just_pressed("ui_accept"):
+		$StartSound.play()
+		$AnimationPlayer.play("start")
+		$StartTimer.start()
 		
+		
+
+
+func _on_start_timer_timeout() -> void:
+	change_scene.emit()

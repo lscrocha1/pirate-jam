@@ -8,6 +8,7 @@
 script = ExtResource("1_wbdkv")
 
 [node name="TitleMenu" parent="." instance=ExtResource("2_vqbio")]
+position = Vector2(-3, 0)
 
 [node name="Level0" parent="." instance=ExtResource("3_8oam8")]
 visible = false

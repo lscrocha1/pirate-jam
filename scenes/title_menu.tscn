@@ -1,10 +1,50 @@
-[gd_scene load_steps=9 format=3 uid="uid://cvpi6tgef522m"]
+[gd_scene load_steps=11 format=3 uid="uid://cvpi6tgef522m"]
 
 [ext_resource type="Texture2D" uid="uid://c56w1t5whtw01" path="res://assets/title_menu_sword.png" id="1_3uty4"]
 [ext_resource type="Script" path="res://scripts/title_menu.gd" id="1_xjf3c"]
 [ext_resource type="Texture2D" uid="uid://daovtb8gvohb6" path="res://assets/title_menu_bg.png" id="2_0eoiq"]
 [ext_resource type="AudioStream" uid="uid://bpkeprk4gxhd7" path="res://assets/Title-Menu_Theme.mp3" id="3_op6kl"]
 [ext_resource type="FontFile" uid="uid://dce4hcwfi38ex" path="res://assets/yoster-island.regular.ttf" id="4_u6ekn"]
+[ext_resource type="AudioStream" uid="uid://c8bbcqxke4srb" path="res://assets/TitleMenu_ClickButton_Start_01_v2.wav" id="6_xg16g"]
+
+[sub_resource type="Animation" id="Animation_w7637"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Label2:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TitleMusic:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_yubfh"]
 resource_name = "blinking_text"
@@ -13,7 +53,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Label2:visible_characters")
+tracks/0/path = NodePath("CanvasGroup/Label2:visible_characters")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -23,47 +63,58 @@ tracks/0/keys = {
 "values": [-1, 0]
 }
 
-[sub_resource type="Animation" id="Animation_w7637"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_dcj3j"]
+resource_name = "start"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Label2:visible_characters")
+tracks/0/path = NodePath("CanvasGroup:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [-1]
+"times": PackedFloat32Array(0.4, 1.5),
+"transitions": PackedFloat32Array(1, 3.605),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TitleMusic:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -20.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u4f5m"]
 _data = {
 "RESET": SubResource("Animation_w7637"),
-"blinking_text": SubResource("Animation_yubfh")
+"blinking_text": SubResource("Animation_yubfh"),
+"start": SubResource("Animation_dcj3j")
 }
 
 [node name="TitleMenu" type="Node2D"]
 script = ExtResource("1_xjf3c")
 
-[node name="Sword" type="Sprite2D" parent="."]
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="Sword" type="Sprite2D" parent="CanvasGroup"]
 z_index = 1
 position = Vector2(640, 343)
 scale = Vector2(0.287556, 0.287556)
 texture = ExtResource("1_3uty4")
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(577.778, 325)
 scale = Vector2(0.288889, 0.288889)
 texture = ExtResource("2_0eoiq")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_op6kl")
-autoplay = true
-parameters/looping = false
-
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="CanvasGroup"]
 z_index = 2
 offset_left = 15.0
 offset_top = 141.0
@@ -74,7 +125,7 @@ theme_override_fonts/font = ExtResource("4_u6ekn")
 theme_override_font_sizes/font_size = 67
 text = "The One Who Slays"
 
-[node name="Label2" type="Label" parent="."]
+[node name="Label2" type="Label" parent="CanvasGroup"]
 z_index = 2
 offset_left = 138.0
 offset_top = 304.0
@@ -83,11 +134,30 @@ offset_bottom = 372.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_u6ekn")
 theme_override_font_sizes/font_size = 30
-text = "Press any key to start "
-visible_ratio = -0.0434783
+text = "Press enter to start 
+"
+visible_ratio = -0.0454545
+
+[node name="TitleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_op6kl")
+autoplay = true
+parameters/looping = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_u4f5m")
 }
 autoplay = "blinking_text"
+
+[node name="StartSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_xg16g")
+bus = &"SFX"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 325)
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

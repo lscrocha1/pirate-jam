@@ -10,7 +10,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-# TODO: add a loading screen for changing between levels
 func _on_title_menu_change_scene() -> void:
-	$TitleMenu.hide()
+	$TitleMenu.queue_free()
 	$Level0.show()
